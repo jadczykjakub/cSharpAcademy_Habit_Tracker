@@ -9,5 +9,3 @@ class Program
         Menu.ShowMenu();
     }
 }
-
-

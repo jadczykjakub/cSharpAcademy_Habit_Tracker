@@ -1,10 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Program;
 
 namespace cSharpAcademy_Habit_Tracker
@@ -49,7 +44,7 @@ namespace cSharpAcademy_Habit_Tracker
 
                 SqliteDataReader reader = tableCmd.ExecuteReader();
 
-                List<DrinkingWater> tableData = new List<DrinkingWater>();
+                List<Model.DrinkingWater> tableData = new List<Model.DrinkingWater>();
 
 
                 if (reader.HasRows)
@@ -57,7 +52,7 @@ namespace cSharpAcademy_Habit_Tracker
                     while (reader.Read())
                     {
                         tableData.Add(
-                            new DrinkingWater
+                            new Model.DrinkingWater
                             {
                                 Id = reader.GetInt32(0),
                                 Date = DateTime.ParseExact(reader.GetString(1), "MM-dd-yy", new CultureInfo("en-US")),
@@ -106,7 +101,6 @@ namespace cSharpAcademy_Habit_Tracker
             }
         }
 
-
         internal static void Update()
         {
             Console.WriteLine("Please give Id row you would like to update");
@@ -115,7 +109,6 @@ namespace cSharpAcademy_Habit_Tracker
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
-
                 var tableCmd = connection.CreateCommand();
                 tableCmd.CommandText = $"SELECT EXISTS(SELECT 1 FROM drinking_water WHERE Id = {idRowToUpdate})";
                 int checkQuery = Convert.ToInt32(tableCmd.ExecuteScalar());
@@ -127,10 +120,9 @@ namespace cSharpAcademy_Habit_Tracker
                 }
 
                 Console.WriteLine("Please give me date. Format: dd-mm-yy");
-
                 string date = Helpers.ValidationDate(Console.ReadLine());
-                Console.WriteLine("Please give me Quatnity");
 
+                Console.WriteLine("Please give me Quatnity");
                 int quantity = Convert.ToInt32(Helpers.ValidationNumber(Console.ReadLine()));
 
                 tableCmd.CommandText = $"UPDATE drinking_water SET Date = '{date}', Quantity = '{quantity}' WHERE Id = {idRowToUpdate}";
