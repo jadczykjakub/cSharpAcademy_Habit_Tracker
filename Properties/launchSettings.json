@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "cSharpAcademy_Habit_Tracker": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\jadcz\\source\\repos\\cSharpAcademy_Habit_Tracker"
+    }
+  }
+}
